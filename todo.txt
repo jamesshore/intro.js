@@ -5,6 +5,8 @@ GOAL:
 
 STRATEGY:
 - Get the code to build locally
+  - Add "jake run" target
+  - Set up JSHint for linting
 - Set up some basic automation
 - Write pinning test that runs multi-page example and compares to known-good DOM after every step
 - Write test around the animations? (or test manually?)
