@@ -1,0 +1,71 @@
+GOAL:
+- Refactor _showElement
+? Add smooth scrolling to step changes
+
+
+STRATEGY:
+- Get the code to build locally
+- Set up some basic automation
+- Write pinning test that runs multi-page example and compares to known-good DOM after every step
+- Write test around the animations? (or test manually?)
+
+
+
+
+Intro.js design
+
+IntroJs class
+.clone()
+.setOption()
+.setOptions()
+.start()  --> _introForObject
+.goToStep()
+.nextStep()
+.previousStep()
+.exit()  --> _exitIntro
+.refresh()  --> setHelperLayerPosition
+.onbeforechange()
+.onchange()
+.onafterchange()
+.oncomplete()
+.onexit()
+
+
+
+Large functions:
+
+_introForElement    (INITIALIZE STEPS FROM DOM / CONFIG)
+_showElement        (HEAVY LIFTING FOR DISPLAYING INTRO)
+
+
+Control functions:
+
+_goToStep (small)
+_nextStep
+_previousStep (small)
+_exitIntro
+
+
+Internal function:
+
+_placeTooltip
+_setHelperLayerPosition
+_addOverlayLayer
+
+
+Utility functions:
+
+_cloneObject
+_getPropValue
+_getWinSize
+_elementInViewport
+_getOffset
+_mergeOptions
+
+
+Module stuff:
+var introJs
+introJs.VERSION
+introJs.fn = IntroJs.prototype   (EXTERNAL API)
+
+
