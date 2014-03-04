@@ -18,8 +18,9 @@
 
 	desc("Run a local server for manual testing");
 	task("run", function() {
-		console.log("Server code goes here");
-	});
+		console.log("** Navigate to the 'example' directory **");
+		jake.exec("node node_modules/http-server/bin/http-server", { interactive: true });
+	}, { async: true });
 
 	function jshintOptions() {
 		return {
