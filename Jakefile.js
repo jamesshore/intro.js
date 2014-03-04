@@ -3,8 +3,9 @@
 	"use strict";
 
 	var jshint = require("simplebuild-jshint");
+	var casperjs = require("./tests/casperjs_runner.js");
 
-	task("default", ["lint"]);
+	task("default", [ "lint", "test" ]);
 
 	desc("Lint the code");
 	task("lint", function() {
@@ -14,6 +15,12 @@
 			options: jshintOptions(),
 			globals: {}
 		}, complete, fail);
+	}, { async: true });
+
+	desc("Run tests");
+	task("test", function() {
+		console.log("Testing:");
+		casperjs.runPinningTests(complete, fail);
 	}, { async: true });
 
 	desc("Run a local server for manual testing");

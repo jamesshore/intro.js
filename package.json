@@ -12,7 +12,9 @@
     "jake": "^0.7.7",
     "jshint": "^2.4.4",
     "simplebuild-jshint": "^0.2.0",
-    "http-server": "^0.6.1"
+    "http-server": "^0.6.1",
+    "casperjs": "^1.1.0-beta3",
+    "phantomjs": "^1.9.7-1"
   },
   "engine": [
     "node >=0.1.90"
