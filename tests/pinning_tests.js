@@ -10,9 +10,31 @@
 		casper.start(URL).run(done);
 	});
 
-	casper.test.begin("Do-nothing test", function(test) {
+	casper.test.begin("Navigate through all steps using the mouse", function(test) {
 		test.assertExists("#startButton");
-		test.done();
+
+
+		casper.thenClick("#startButton");
+		thenClickNext();        // step 2
+		thenClickNext();        // step 3
+		thenClickNextPage();    // step 4
+		thenClickNext();        // step 5
+		thenClickNextPage();    // done
+		casper.run(function() {
+				casper.capture("deleteme.png");
+				test.done();
+		});
 	});
+
+	function thenClickNext() {
+		return casper.thenClick(".introjs-nextbutton")
+			.wait(1000);
+	}
+
+	function thenClickNextPage() {
+		return casper.thenClick(".introjs-skipbutton")
+			.wait(1000);
+
+	}
 
 }());

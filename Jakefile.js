@@ -11,7 +11,7 @@
 	task("lint", function() {
 		process.stdout.write("Linting: ");
 		jshint.checkFiles({
-			files: "*.js",
+			files: [ "*.js", "tests/**/*.js" ],
 			options: jshintOptions(),
 			globals: {}
 		}, complete, fail);
