@@ -8,6 +8,7 @@
 
 	desc("Lint the code");
 	task("lint", function() {
+		process.stdout.write("Linting: ");
 		jshint.checkFiles({
 			files: "*.js",
 			options: jshintOptions(),
@@ -23,16 +24,15 @@
 	function jshintOptions() {
 		return {
 			// Make JSHint more permissive so existing code lints (could be hiding bugs)
-			eqnull: true,
 			smarttabs: true,
 			funcscope: true,
 			shadow: true,
 			scripturl: true,
 			loopfunc: true,
 			expr: true,
-			"-W032": false,       // Unnecessary semicolon
-			"-W041": false,       // Use '===' to compare with 'true'
-			"-W086": false        // Expected a 'break' statement before 'default'.
+			"-W032": true,        // Unnecessary semicolon
+			"-W041": true,        // Use '===' to compare with 'true'
+			"-W086": true         // Expected a 'break' statement before 'default'.
 		};
 	}
 }());
