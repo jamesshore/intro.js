@@ -12,6 +12,7 @@ STRATEGY:
   - get the test working with manual verification
   - add DOM assertions
   - check the test by breaking the production code deliberately
+  - show errors more cleanly
 - Write test around the animations? (or test manually?)
 
 
