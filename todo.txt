@@ -9,8 +9,10 @@ STRATEGY:
   - Set up JSHint for linting
 - Set up some basic automation
 - Write pinning test that runs multi-page example and compares to known-good DOM after every step
+  - get the test working with manual verification
+  - add DOM assertions
+  - check the test by breaking the production code deliberately
 - Write test around the animations? (or test manually?)
-
 
 
 
