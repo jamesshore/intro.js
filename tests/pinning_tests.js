@@ -7,6 +7,7 @@
 	var fs = require("fs");     // NOTE! This is the PhantomJS fs module, not Node's fs module
 
 	var URL = "http://localhost:5000/example/multi-page/index.html";
+	var RESET_APPROVALS = false;      // change this to 'true' to re-create the 'known good' approvals
 
 	casper.test.setUp(function(done) {
 		casper.start(URL).run(done);
@@ -43,6 +44,7 @@
 	function thenClickSelector(selector, postClickApproval, test) {
 		casper.thenClick(selector)
 			.wait(1000);
+
 		checkDom(postClickApproval, test);
 	}
 
@@ -53,22 +55,19 @@
 			var actualDom = this.evaluate(function() {
 				return document;
 			});
-			actualDom = JSON.stringify(actualDom);
 
-			var expectedDom = fs.read("./tests/approvals/" + filename);
-			test.assertEquals(actualDom, expectedDom, filename);
+			if (RESET_APPROVALS) resetApproval();
+			else checkApproval();
 
-		});
-	}
+			function checkApproval() {
+				var expectedDom = JSON.parse(fs.read("./tests/approvals/" + filename));
+				test.assertEquals(actualDom, expectedDom, filename);
+			}
 
-
-	function dumpDom(filename) {
-		casper.then(function() {
-			var dom = this.evaluate(function() {
-				return document;
-			});
-			dom = JSON.stringify(dom);
-			fs.write("./tests/approvals/" + filename, dom, "w");
+			function resetApproval() {
+				fs.write("./tests/approvals/" + filename, JSON.stringify(actualDom), "w");
+				test.fail("Re-created approval: " + filename);
+			}
 		});
 	}
 
