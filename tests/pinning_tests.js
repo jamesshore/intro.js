@@ -16,48 +16,48 @@
 		test.assertExists("#startButton");
 
 		checkDom("start.txt", test);
-		casper.thenClick("#startButton");
-		checkDom("step1.txt", test);
-//		thenClickNext();        // step 2
-//		checkDom("step2.txt");
-//		thenClickNext();        // step 3
-//		checkDom("step3.txt");
-//		thenClickNextPage();    // step 4
-//		checkDom("step4.txt");
-//		thenClickNext();        // step 5
-//		checkDom("step5.txt");
-//		thenClickNextPage();    // done
-//		checkDom("end.txt");
+		thenClickStart("step1.txt", test);
+		thenClickNext("step2.txt", test);
+		thenClickNext("step3.txt", test);
+		thenClickNextPage("step4.txt", test);
+		thenClickNext("step5.txt", test);
+		thenClickNextPage("end.txt", test);
 
 		casper.run(function() {
 				test.done();
 		});
 	});
 
-	function thenClickNext() {
-		return thenClickSelector(".introjs-nextbutton");
+	function thenClickStart(postClickApproval, test) {
+		return thenClickSelector("#startButton", postClickApproval, test);
 	}
 
-	function thenClickNextPage() {
-		return thenClickSelector(".introjs-skipbutton");
+	function thenClickNext(postClickApproval, test) {
+		return thenClickSelector(".introjs-nextbutton", postClickApproval, test);
 	}
 
-	function thenClickSelector(selector) {
-		return casper.thenClick(selector)
+	function thenClickNextPage(postClickApproval, test) {
+		return thenClickSelector(".introjs-skipbutton", postClickApproval, test);
+	}
+
+	function thenClickSelector(selector, postClickApproval, test) {
+		casper.thenClick(selector)
 			.wait(1000);
+		checkDom(postClickApproval, test);
 	}
 
 	function checkDom(filename, test) {
 		casper.then(function() {
+			casper.capture("./generated/" + filename + ".png");
+
 			var actualDom = this.evaluate(function() {
 				return document;
 			});
 			actualDom = JSON.stringify(actualDom);
 
 			var expectedDom = fs.read("./tests/approvals/" + filename);
-
-
 			test.assertEquals(actualDom, expectedDom, filename);
+
 		});
 	}
 
