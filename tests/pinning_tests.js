@@ -44,7 +44,7 @@
 
 	function thenClickSelector(selector, postClickApproval, test) {
 		casper.thenClick(selector)
-			.wait(1000);
+			.wait(500);
 
 		checkDom(postClickApproval, test);
 	}
