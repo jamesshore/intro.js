@@ -54,8 +54,9 @@
 			casper.capture("./generated/" + filename + ".png");
 
 			var actualDom = this.evaluate(function() {
-				return document;
+				return document.body;
 			});
+			actualDom = JSON.parse(JSON.stringify(actualDom));   // normalize DOM
 
 			if (RESET_APPROVALS) resetApproval();
 			else checkApproval();
