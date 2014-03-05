@@ -5,6 +5,7 @@
 	"use strict";
 
 	var fs = require("fs");     // NOTE! This is the PhantomJS fs module, not Node's fs module
+	var diff = require("big-object-diff");
 
 	var URL = "http://localhost:5000/example/multi-page/index.html";
 	var RESET_APPROVALS = false;      // change this to 'true' to re-create the 'known good' approvals
@@ -61,7 +62,15 @@
 
 			function checkApproval() {
 				var expectedDom = JSON.parse(fs.read("./tests/approvals/" + filename));
-				test.assertEquals(actualDom, expectedDom, filename);
+
+				var renderedDiff = diff.renderDiff(expectedDom, actualDom);
+				if (renderedDiff !== "") {
+					console.log(renderedDiff);
+					test.fail(filename);
+				}
+				else {
+					test.assert(true, filename);
+				}
 			}
 
 			function resetApproval() {
