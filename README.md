@@ -1,3 +1,19 @@
+The Lab: The Legacy Code Challenge
+=============
+
+This repository contains the sample code for the [Legacy Code Challenge episodes](http://www.letscodejavascript.com/v3/episodes/lab/6) of James Shore's [Let's Code: Test-Driven JavaScript](http://www.letscodejavascript.com) screencast. Let's Code: Test-Driven JavaScript is a screencast series focused on rigorous, professional JavaScript development.
+
+The Legacy Code Challenge episodes were about adding tests to legacy code. The episodes used Afshin Mehrabani's Intro.js as an example. This repository is a fork of Intro.js.
+
+The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. You can find the notes from that work in [todo.txt](./todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/5).
+
+The remaining episodes are still in progress.
+
+
+-----
+
+The original Intro.js readme follows.
+
 # Intro.js
 
 > Better introductions for websites and features with a step-by-step guide for your projects.
@@ -19,26 +35,26 @@ Intro.js can be added to your site in three simple steps:
 
 > CDN hosted files are available at [jsDelivr](http://www.jsdelivr.com/#!intro.js) (click Show More) & [cdnjs](http://cdnjs.com/#introjs).
 
-**2)** Add `data-intro` and `data-step` to your HTML elements.  
+**2)** Add `data-intro` and `data-step` to your HTML elements.
 
-For example: 
+For example:
 
 ```html
 <a href='http://google.com/' data-intro='Hello step one!'></a>
 ````
 
 See all attributes [here](https://github.com/usablica/intro.js/#attributes).
-  
+
 **3)** Call this JavaScript function:
 ```javascript
 introJs().start();
 ````
- 
+
 Optionally, pass one parameter to `introJs` function to limit the presentation section.
 
 **For example** `introJs(".introduction-farm").start();` runs the introduction only for elements with `class='introduction-farm'`.
 
-<p align="center"><img src="http://usablica.github.com/intro.js/img/introjs-demo.png"></p>  
+<p align="center"><img src="http://usablica.github.com/intro.js/img/introjs-demo.png"></p>
 
 ## API
 
@@ -228,7 +244,7 @@ introJs().oncomplete(function() {
 
 ###introJs.onexit(providedCallback)
 
-Set callback to exit of introduction. Exit also means pressing `ESC` key and clicking on the overlay layer by the user.  
+Set callback to exit of introduction. Exit also means pressing `ESC` key and clicking on the overlay layer by the user.
 
 **Available since:** v0.2.0
 
@@ -262,7 +278,7 @@ The callback function receives the element of the new step as an argument.
 
 **Example:**
 ```javascript
-introJs().onchange(function(targetElement) {  
+introJs().onchange(function(targetElement) {
   alert("new step");
 });
 ````
@@ -283,7 +299,7 @@ Given callback function will be called before starting a new step of introductio
 
 **Example:**
 ```javascript
-introJs().onbeforechange(function(targetElement) {  
+introJs().onbeforechange(function(targetElement) {
   alert("before new step");
 });
 ````
@@ -304,7 +320,7 @@ Given callback function will be called after starting a new step of introduction
 
 **Example:**
 ```javascript
-introJs().onafterchange(function(targetElement) {  
+introJs().onafterchange(function(targetElement) {
   alert("after new step");
 });
 ````
@@ -364,11 +380,11 @@ Now you can run this command to minify all static resources:
 
 ## Instant IntroJs
 
-Want to learn faster and easier? Here we have **Instant IntroJs**, Packt Publishing.  
+Want to learn faster and easier? Here we have **Instant IntroJs**, Packt Publishing.
 
 <p align="center">
   <a target='_blank' href="http://www.packtpub.com/create-useful-introductions-for-websites-and-applications-with-introjs-library/book"><img src='http://dgdsbygo8mp3h.cloudfront.net/sites/default/files/imagecache/productview_larger/2517OS_Instant%20IntroJS%20Starter.jpg' /></a>
-</p>  
+</p>
 
 <p align="center">
   <a target='_blank' href="http://www.packtpub.com/create-useful-introductions-for-websites-and-applications-with-introjs-library/book">Buy and Download</a>
@@ -451,17 +467,17 @@ Want to learn faster and easier? Here we have **Instant IntroJs**, Packt Publish
    - Fix show element for elements with position `absolute` or `relative`
    - Add `enter` key for navigating in steps
    - Code refactoring
-  
-  
- * **v0.1.0** - 2013-03-16 
-   - First commit. 
+
+
+ * **v0.1.0** - 2013-03-16
+   - First commit.
 
 ## Author
 **Afshin Mehrabani**
 
 - [Twitter](https://twitter.com/afshinmeh)
 - [Github](https://github.com/afshinm)
-- [Personal page](http://afshinm.name/)  
+- [Personal page](http://afshinm.name/)
 
 [Other contributors](https://github.com/usablica/intro.js/graphs/contributors)
 
