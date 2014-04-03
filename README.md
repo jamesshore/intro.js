@@ -5,7 +5,7 @@ This repository contains the sample code for the [Legacy Code Challenge episodes
 
 The Legacy Code Challenge episodes were about adding tests to legacy code. The episodes used Afshin Mehrabani's Intro.js as an example. This repository is a fork of Intro.js.
 
-The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. You can find the notes from that work in [todo.txt](./todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/5).
+The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. You can find the notes from that work in [todo.txt](./todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/6).
 
 The remaining episodes are still in progress.
 
