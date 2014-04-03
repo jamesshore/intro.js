@@ -7,7 +7,7 @@ The Legacy Code Challenge episodes are about refactoring and adding tests to leg
 
 The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. You can find the notes from that work in [todo.txt](./todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/6).
 
-The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) focused on introducing automating “pinning tests” to Intro.js. Pinning tests are rough tests designed to tell you when you’ve changed the behavior of your code in some way. The source code for that episode is on the [lab7 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab6) and the pinning tests can be found in the [tests directory](https://github.com/jamesshore/lab6_legacy_code/tree/lab6/tests). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/7).
+The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) focused on introducing automating “pinning tests” to Intro.js. Pinning tests are rough tests designed to tell you when you’ve changed the behavior of your code in some way. The source code for that episode is on the [lab7 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab7) and the pinning tests can be found in the [tests directory](https://github.com/jamesshore/lab6_legacy_code/tree/lab7/tests). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/7).
 
 The remaining episodes are still in progress.
 
