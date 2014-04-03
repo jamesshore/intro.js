@@ -5,9 +5,9 @@ This repository contains the sample code for the [Legacy Code Challenge episodes
 
 The Legacy Code Challenge episodes are about refactoring and adding tests to legacy code. The episodes use Afshin Mehrabani's [Intro.js](http://usablica.github.io/intro.js/) as an example. This repository is a fork of Intro.js.
 
-The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. You can find the notes from that work in [todo.txt](./todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/6).
+The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. The source code for that episode is on the [lab6 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab6) and the notes from that work can be found in [todo.txt](https://github.com/jamesshore/lab6_legacy_code/blob/lab6/todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/6).
 
-The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) focused on introducing automating “pinning tests” to Intro.js. Pinning tests are rough tests designed to tell you when you’ve changed the behavior of your code in some way. The source code for that episode is on the [lab7 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab6) and the pinning tests can be found in the [tests directory](https://github.com/jamesshore/lab6_legacy_code/tree/lab6/tests). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/7).
+The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) focused on introducing automating “pinning tests” to Intro.js. Pinning tests are rough tests designed to tell you when you’ve changed the behavior of your code in some way. They can be found in the [tests directory](https://github.com/jamesshore/lab6_legacy_code/tree/lab7/tests). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/7).
 
 The remaining episodes are still in progress.
 
