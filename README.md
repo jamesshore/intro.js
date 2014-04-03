@@ -3,12 +3,13 @@ The Lab: The Legacy Code Challenge
 
 This repository contains the sample code for the [Legacy Code Challenge episodes](http://www.letscodejavascript.com/v3/episodes/lab/6) of James Shore's [Let's Code: Test-Driven JavaScript](http://www.letscodejavascript.com) screencast. Let's Code: Test-Driven JavaScript is a screencast series focused on rigorous, professional JavaScript development.
 
-The Legacy Code Challenge episodes were about adding tests to legacy code. The episodes used Afshin Mehrabani's Intro.js as an example. This repository is a fork of Intro.js.
+The Legacy Code Challenge episodes are about refactoring and adding tests to legacy code. The episodes use Afshin Mehrabani's [Intro.js](http://usablica.github.io/intro.js/) as an example. This repository is a fork of Intro.js.
 
-The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. You can find the notes from that work in [todo.txt](./todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/5).
+The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. You can find the notes from that work in [todo.txt](./todo.txt). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/6).
+
+The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) focused on introducing automating “pinning tests” to Intro.js. Pinning tests are rough tests designed to tell you when you’ve changed the behavior of your code in some way. The source code for that episode is on the [lab7 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab6) and the pinning tests can be found in the [tests directory](https://github.com/jamesshore/lab6_legacy_code/tree/lab6/tests). For details, watch [the screencast](http://www.letscodejavascript.com/v3/episodes/lab/7).
 
 The remaining episodes are still in progress.
-
 
 -----
 
