@@ -437,7 +437,7 @@
     var self = this,
         oldHelperLayer = document.querySelector('.introjs-helperLayer');
 
-	  if (oldHelperLayer === null) createHelperLayerAndShowTooltip.call(this);
+	  if (oldHelperLayer === null) createHelperLayerAndShowTooltip();
 	  else showTooltipUsingExistingHelperLayer();
 
 
@@ -570,7 +570,7 @@
 		  _setHelperLayerPosition.call(self, helperLayer);
 
 		  //add helper layer to target element
-		  this._targetElement.appendChild(helperLayer);
+		  self._targetElement.appendChild(helperLayer);
 
 		  arrowLayer.className = 'introjs-arrow';
 
@@ -579,25 +579,25 @@
 
 		  bulletsLayer.className = 'introjs-bullets';
 
-		  if (this._options.showBullets === false) {
+		  if (self._options.showBullets === false) {
 			  bulletsLayer.style.display = 'none';
 		  }
 
 		  var ulContainer = document.createElement('ul');
 
-		  for (var i = 0, stepsLength = this._introItems.length; i < stepsLength; i++) {
+		  for (var i = 0, stepsLength = self._introItems.length; i < stepsLength; i++) {
 			  var innerLi = document.createElement('li');
 			  var anchorLink = document.createElement('a');
 
 			  anchorLink.onclick = function() {
-				  self.goToStep(this.getAttribute('data-stepnumber'));
+				  self.goToStep(self.getAttribute('data-stepnumber'));
 			  };
 
 			  if (i === 0) anchorLink.className = "active";
 
 			  anchorLink.href = 'javascript:void(0);';
 			  anchorLink.innerHTML = "&nbsp;";
-			  anchorLink.setAttribute('data-stepnumber', this._introItems[i].step);
+			  anchorLink.setAttribute('data-stepnumber', self._introItems[i].step);
 
 			  innerLi.appendChild(anchorLink);
 			  ulContainer.appendChild(innerLi);
@@ -606,7 +606,7 @@
 		  bulletsLayer.appendChild(ulContainer);
 
 		  buttonsLayer.className = 'introjs-tooltipbuttons';
-		  if (this._options.showButtons === false) {
+		  if (self._options.showButtons === false) {
 			  buttonsLayer.style.display = 'none';
 		  }
 
@@ -615,7 +615,7 @@
 		  tooltipLayer.appendChild(bulletsLayer);
 
 		  //add helper layer number
-		  if (this._options.showStepNumbers == true) {
+		  if (self._options.showStepNumbers == true) {
 			  var helperNumberLayer = document.createElement('span');
 			  helperNumberLayer.className = 'introjs-helperNumberLayer';
 			  helperNumberLayer.innerHTML = targetElement.step;
@@ -634,7 +634,7 @@
 		  };
 
 		  nextTooltipButton.href = 'javascript:void(0);';
-		  nextTooltipButton.innerHTML = this._options.nextLabel;
+		  nextTooltipButton.innerHTML = self._options.nextLabel;
 
 		  //previous button
 		  prevTooltipButton = document.createElement('a');
@@ -646,13 +646,13 @@
 		  };
 
 		  prevTooltipButton.href = 'javascript:void(0);';
-		  prevTooltipButton.innerHTML = this._options.prevLabel;
+		  prevTooltipButton.innerHTML = self._options.prevLabel;
 
 		  //skip button
 		  skipTooltipButton = document.createElement('a');
 		  skipTooltipButton.className = 'introjs-button introjs-skipbutton';
 		  skipTooltipButton.href = 'javascript:void(0);';
-		  skipTooltipButton.innerHTML = this._options.skipLabel;
+		  skipTooltipButton.innerHTML = self._options.skipLabel;
 
 		  skipTooltipButton.onclick = function() {
 			  if (self._introItems.length - 1 == self._currentStep && typeof (self._introCompleteCallback) === 'function') {
@@ -669,7 +669,7 @@
 		  buttonsLayer.appendChild(skipTooltipButton);
 
 		  //in order to prevent displaying next/previous button always
-		  if (this._introItems.length > 1) {
+		  if (self._introItems.length > 1) {
 			  buttonsLayer.appendChild(prevTooltipButton);
 			  buttonsLayer.appendChild(nextTooltipButton);
 		  }
