@@ -18,7 +18,7 @@
 	}, { async: true });
 
 	desc("Run tests");
-	task("test", function() {
+	task("test", ["fixPhantomJsPermissions"], function() {
 		console.log("Testing:");
 		casperjs.runPinningTests(complete, fail);
 	}, { async: true });
@@ -26,7 +26,14 @@
 	desc("Run a local server for manual testing");
 	task("run", function() {
 		console.log("** Navigate to the 'example' directory **");
-		jake.exec("node node_modules/http-server/bin/http-server", { interactive: true });
+		jake.exec("node node_modules/http-server/bin/http-server", { interactive: true }, complete);
+	}, { async: true });
+
+	// When PhantomJS is installed through npm, it's installed without execute permissions.
+	// Running the PhantomJS npm script fixes it, so we just run a do-nothing command here.
+	task("fixPhantomJsPermissions", function() {
+		process.stdout.write("Fixing PhantomJS: ");
+		jake.exec("node_modules/.bin/phantomjs -v", { interactive: true }, complete);
 	}, { async: true });
 
 	function jshintOptions() {
