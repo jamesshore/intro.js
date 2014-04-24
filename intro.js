@@ -439,10 +439,7 @@
 
 
 	  if (oldHelperLayer != null) {
-		  var __ret = showTooltipUsingExistingHelperLayer();
-		  skipTooltipButton = __ret.skipTooltipButton;
-		  prevTooltipButton = __ret.prevTooltipButton;
-		  nextTooltipButton = __ret.nextTooltipButton;
+		  showTooltipUsingExistingHelperLayer();
 	  } else {
 		  createHelperLayerAndShowTooltip.call(this);
 	  }
@@ -515,10 +512,11 @@
 		  var oldHelperNumberLayer = oldHelperLayer.querySelector('.introjs-helperNumberLayer'),
 			  oldtooltipLayer = oldHelperLayer.querySelector('.introjs-tooltiptext'),
 			  oldArrowLayer = oldHelperLayer.querySelector('.introjs-arrow'),
-			  oldtooltipContainer = oldHelperLayer.querySelector('.introjs-tooltip'),
-			  skipTooltipButton = oldHelperLayer.querySelector('.introjs-skipbutton'),
-			  prevTooltipButton = oldHelperLayer.querySelector('.introjs-prevbutton'),
-			  nextTooltipButton = oldHelperLayer.querySelector('.introjs-nextbutton');
+			  oldtooltipContainer = oldHelperLayer.querySelector('.introjs-tooltip');
+
+		  skipTooltipButton = oldHelperLayer.querySelector('.introjs-skipbutton');
+		  prevTooltipButton = oldHelperLayer.querySelector('.introjs-prevbutton');
+		  nextTooltipButton = oldHelperLayer.querySelector('.introjs-nextbutton');
 
 		  //hide the tooltip
 		  oldtooltipContainer.style.opacity = 0;
@@ -559,7 +557,6 @@
 			  //show the tooltip
 			  oldtooltipContainer.style.opacity = 1;
 		  }, 350);
-		  return {skipTooltipButton: skipTooltipButton, prevTooltipButton: prevTooltipButton, nextTooltipButton: nextTooltipButton};
 	  }
 
 	  function createHelperLayerAndShowTooltip() {
