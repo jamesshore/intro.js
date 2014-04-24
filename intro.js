@@ -437,12 +437,9 @@
     var self = this,
         oldHelperLayer = document.querySelector('.introjs-helperLayer');
 
+	  if (oldHelperLayer === null) createHelperLayerAndShowTooltip.call(this);
+	  else showTooltipUsingExistingHelperLayer();
 
-	  if (oldHelperLayer != null) {
-		  showTooltipUsingExistingHelperLayer();
-	  } else {
-		  createHelperLayerAndShowTooltip.call(this);
-	  }
 
     if (this._currentStep == 0 && this._introItems.length > 1) {
       prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled';
