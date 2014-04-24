@@ -427,6 +427,8 @@
    * @param {Object} targetElement
    */
   function _showElement(targetElement) {
+	  var nextTooltipButton, prevTooltipButton, skipTooltipButton;
+
 
     if (typeof (this._introChangeCallback) !== 'undefined') {
         this._introChangeCallback.call(this, targetElement.element);
@@ -435,62 +437,11 @@
     var self = this,
         oldHelperLayer = document.querySelector('.introjs-helperLayer');
 
-	  function showTooltipUsingExistingHelperLayer() {
-		  var oldHelperNumberLayer = oldHelperLayer.querySelector('.introjs-helperNumberLayer'),
-			  oldtooltipLayer = oldHelperLayer.querySelector('.introjs-tooltiptext'),
-			  oldArrowLayer = oldHelperLayer.querySelector('.introjs-arrow'),
-			  oldtooltipContainer = oldHelperLayer.querySelector('.introjs-tooltip'),
-			  skipTooltipButton = oldHelperLayer.querySelector('.introjs-skipbutton'),
-			  prevTooltipButton = oldHelperLayer.querySelector('.introjs-prevbutton'),
-			  nextTooltipButton = oldHelperLayer.querySelector('.introjs-nextbutton');
-
-		  //hide the tooltip
-		  oldtooltipContainer.style.opacity = 0;
-
-		  //set new position to helper layer
-		  _setHelperLayerPosition.call(self, oldHelperLayer);
-
-		  //remove `introjs-fixParent` class from the elements
-		  var fixParents = document.querySelectorAll('.introjs-fixParent');
-		  if (fixParents && fixParents.length > 0) {
-			  for (var i = fixParents.length - 1; i >= 0; i--) {
-				  fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g, '').replace(/^\s+|\s+$/g, '');
-			  }
-			  ;
-		  }
-
-		  //remove old classes
-		  var oldShowElement = document.querySelector('.introjs-showElement');
-		  oldShowElement.className = oldShowElement.className.replace(/introjs-[a-zA-Z]+/g, '').replace(/^\s+|\s+$/g, '');
-		  //we should wait until the CSS3 transition is competed (it's 0.3 sec) to prevent incorrect `height` and `width` calculation
-		  if (self._lastShowElementTimer) {
-			  clearTimeout(self._lastShowElementTimer);
-		  }
-		  self._lastShowElementTimer = setTimeout(function() {
-			  //set current step to the label
-			  if (oldHelperNumberLayer != null) {
-				  oldHelperNumberLayer.innerHTML = targetElement.step;
-			  }
-			  //set current tooltip text
-			  oldtooltipLayer.innerHTML = targetElement.intro;
-			  //set the tooltip position
-			  _placeTooltip.call(self, targetElement.element, oldtooltipContainer, oldArrowLayer);
-
-			  //change active bullet
-			  oldHelperLayer.querySelector('.introjs-bullets li > a.active').className = '';
-			  oldHelperLayer.querySelector('.introjs-bullets li > a[data-stepnumber="' + targetElement.step + '"]').className = 'active';
-
-			  //show the tooltip
-			  oldtooltipContainer.style.opacity = 1;
-		  }, 350);
-		  return {skipTooltipButton: skipTooltipButton, prevTooltipButton: prevTooltipButton, nextTooltipButton: nextTooltipButton};
-	  }
-
 	  if (oldHelperLayer != null) {
 		  var __ret = showTooltipUsingExistingHelperLayer();
-		  var skipTooltipButton = __ret.skipTooltipButton;
-		  var prevTooltipButton = __ret.prevTooltipButton;
-		  var nextTooltipButton = __ret.nextTooltipButton;
+		  skipTooltipButton = __ret.skipTooltipButton;
+		  prevTooltipButton = __ret.prevTooltipButton;
+		  nextTooltipButton = __ret.nextTooltipButton;
 	  } else {
       var helperLayer       = document.createElement('div'),
           arrowLayer        = document.createElement('div'),
@@ -560,7 +511,7 @@
       helperLayer.appendChild(tooltipLayer);
 
       //next button
-      var nextTooltipButton = document.createElement('a');
+      nextTooltipButton = document.createElement('a');
 
       nextTooltipButton.onclick = function() {
         if (self._introItems.length - 1 != self._currentStep) {
@@ -572,7 +523,7 @@
       nextTooltipButton.innerHTML = this._options.nextLabel;
 
       //previous button
-      var prevTooltipButton = document.createElement('a');
+      prevTooltipButton = document.createElement('a');
 
       prevTooltipButton.onclick = function() {
         if (self._currentStep != 0) {
@@ -584,7 +535,7 @@
       prevTooltipButton.innerHTML = this._options.prevLabel;
 
       //skip button
-      var skipTooltipButton = document.createElement('a');
+      skipTooltipButton = document.createElement('a');
       skipTooltipButton.className = 'introjs-button introjs-skipbutton';
       skipTooltipButton.href = 'javascript:void(0);';
       skipTooltipButton.innerHTML = this._options.skipLabel;
@@ -676,7 +627,60 @@
     if (typeof (this._introAfterChangeCallback) !== 'undefined') {
         this._introAfterChangeCallback.call(this, targetElement.element);
     }
+
+
+	  function showTooltipUsingExistingHelperLayer() {
+		  var oldHelperNumberLayer = oldHelperLayer.querySelector('.introjs-helperNumberLayer'),
+			  oldtooltipLayer = oldHelperLayer.querySelector('.introjs-tooltiptext'),
+			  oldArrowLayer = oldHelperLayer.querySelector('.introjs-arrow'),
+			  oldtooltipContainer = oldHelperLayer.querySelector('.introjs-tooltip'),
+			  skipTooltipButton = oldHelperLayer.querySelector('.introjs-skipbutton'),
+			  prevTooltipButton = oldHelperLayer.querySelector('.introjs-prevbutton'),
+			  nextTooltipButton = oldHelperLayer.querySelector('.introjs-nextbutton');
+
+		  //hide the tooltip
+		  oldtooltipContainer.style.opacity = 0;
+
+		  //set new position to helper layer
+		  _setHelperLayerPosition.call(self, oldHelperLayer);
+
+		  //remove `introjs-fixParent` class from the elements
+		  var fixParents = document.querySelectorAll('.introjs-fixParent');
+		  if (fixParents && fixParents.length > 0) {
+			  for (var i = fixParents.length - 1; i >= 0; i--) {
+				  fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g, '').replace(/^\s+|\s+$/g, '');
+			  }
+			  ;
+		  }
+
+		  //remove old classes
+		  var oldShowElement = document.querySelector('.introjs-showElement');
+		  oldShowElement.className = oldShowElement.className.replace(/introjs-[a-zA-Z]+/g, '').replace(/^\s+|\s+$/g, '');
+		  //we should wait until the CSS3 transition is competed (it's 0.3 sec) to prevent incorrect `height` and `width` calculation
+		  if (self._lastShowElementTimer) {
+			  clearTimeout(self._lastShowElementTimer);
+		  }
+		  self._lastShowElementTimer = setTimeout(function() {
+			  //set current step to the label
+			  if (oldHelperNumberLayer != null) {
+				  oldHelperNumberLayer.innerHTML = targetElement.step;
+			  }
+			  //set current tooltip text
+			  oldtooltipLayer.innerHTML = targetElement.intro;
+			  //set the tooltip position
+			  _placeTooltip.call(self, targetElement.element, oldtooltipContainer, oldArrowLayer);
+
+			  //change active bullet
+			  oldHelperLayer.querySelector('.introjs-bullets li > a.active').className = '';
+			  oldHelperLayer.querySelector('.introjs-bullets li > a[data-stepnumber="' + targetElement.step + '"]').className = 'active';
+
+			  //show the tooltip
+			  oldtooltipContainer.style.opacity = 1;
+		  }, 350);
+		  return {skipTooltipButton: skipTooltipButton, prevTooltipButton: prevTooltipButton, nextTooltipButton: nextTooltipButton};
+	  }
   }
+
 
   /**
    * Get an element CSS property on the page
