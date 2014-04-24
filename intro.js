@@ -433,58 +433,65 @@
     }
 
     var self = this,
-        oldHelperLayer = document.querySelector('.introjs-helperLayer'),
-        elementPosition = _getOffset(targetElement.element);
+        oldHelperLayer = document.querySelector('.introjs-helperLayer');
 
-    if (oldHelperLayer != null) {
-      var oldHelperNumberLayer = oldHelperLayer.querySelector('.introjs-helperNumberLayer'),
-          oldtooltipLayer      = oldHelperLayer.querySelector('.introjs-tooltiptext'),
-          oldArrowLayer        = oldHelperLayer.querySelector('.introjs-arrow'),
-          oldtooltipContainer  = oldHelperLayer.querySelector('.introjs-tooltip'),
-          skipTooltipButton    = oldHelperLayer.querySelector('.introjs-skipbutton'),
-          prevTooltipButton    = oldHelperLayer.querySelector('.introjs-prevbutton'),
-          nextTooltipButton    = oldHelperLayer.querySelector('.introjs-nextbutton');
+	  function showTooltipUsingExistingHelperLayer() {
+		  var oldHelperNumberLayer = oldHelperLayer.querySelector('.introjs-helperNumberLayer'),
+			  oldtooltipLayer = oldHelperLayer.querySelector('.introjs-tooltiptext'),
+			  oldArrowLayer = oldHelperLayer.querySelector('.introjs-arrow'),
+			  oldtooltipContainer = oldHelperLayer.querySelector('.introjs-tooltip'),
+			  skipTooltipButton = oldHelperLayer.querySelector('.introjs-skipbutton'),
+			  prevTooltipButton = oldHelperLayer.querySelector('.introjs-prevbutton'),
+			  nextTooltipButton = oldHelperLayer.querySelector('.introjs-nextbutton');
 
-      //hide the tooltip
-      oldtooltipContainer.style.opacity = 0;
+		  //hide the tooltip
+		  oldtooltipContainer.style.opacity = 0;
 
-      //set new position to helper layer
-      _setHelperLayerPosition.call(self, oldHelperLayer);
+		  //set new position to helper layer
+		  _setHelperLayerPosition.call(self, oldHelperLayer);
 
-      //remove `introjs-fixParent` class from the elements
-      var fixParents = document.querySelectorAll('.introjs-fixParent');
-      if (fixParents && fixParents.length > 0) {
-        for (var i = fixParents.length - 1; i >= 0; i--) {
-          fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g, '').replace(/^\s+|\s+$/g, '');
-        };
-      }
+		  //remove `introjs-fixParent` class from the elements
+		  var fixParents = document.querySelectorAll('.introjs-fixParent');
+		  if (fixParents && fixParents.length > 0) {
+			  for (var i = fixParents.length - 1; i >= 0; i--) {
+				  fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g, '').replace(/^\s+|\s+$/g, '');
+			  }
+			  ;
+		  }
 
-      //remove old classes
-      var oldShowElement = document.querySelector('.introjs-showElement');
-      oldShowElement.className = oldShowElement.className.replace(/introjs-[a-zA-Z]+/g, '').replace(/^\s+|\s+$/g, '');
-      //we should wait until the CSS3 transition is competed (it's 0.3 sec) to prevent incorrect `height` and `width` calculation
-      if (self._lastShowElementTimer) {
-        clearTimeout(self._lastShowElementTimer);
-      }
-      self._lastShowElementTimer = setTimeout(function() {
-        //set current step to the label
-        if (oldHelperNumberLayer != null) {
-          oldHelperNumberLayer.innerHTML = targetElement.step;
-        }
-        //set current tooltip text
-        oldtooltipLayer.innerHTML = targetElement.intro;
-        //set the tooltip position
-        _placeTooltip.call(self, targetElement.element, oldtooltipContainer, oldArrowLayer);
+		  //remove old classes
+		  var oldShowElement = document.querySelector('.introjs-showElement');
+		  oldShowElement.className = oldShowElement.className.replace(/introjs-[a-zA-Z]+/g, '').replace(/^\s+|\s+$/g, '');
+		  //we should wait until the CSS3 transition is competed (it's 0.3 sec) to prevent incorrect `height` and `width` calculation
+		  if (self._lastShowElementTimer) {
+			  clearTimeout(self._lastShowElementTimer);
+		  }
+		  self._lastShowElementTimer = setTimeout(function() {
+			  //set current step to the label
+			  if (oldHelperNumberLayer != null) {
+				  oldHelperNumberLayer.innerHTML = targetElement.step;
+			  }
+			  //set current tooltip text
+			  oldtooltipLayer.innerHTML = targetElement.intro;
+			  //set the tooltip position
+			  _placeTooltip.call(self, targetElement.element, oldtooltipContainer, oldArrowLayer);
 
-        //change active bullet
-        oldHelperLayer.querySelector('.introjs-bullets li > a.active').className = '';
-        oldHelperLayer.querySelector('.introjs-bullets li > a[data-stepnumber="' + targetElement.step + '"]').className = 'active';
+			  //change active bullet
+			  oldHelperLayer.querySelector('.introjs-bullets li > a.active').className = '';
+			  oldHelperLayer.querySelector('.introjs-bullets li > a[data-stepnumber="' + targetElement.step + '"]').className = 'active';
 
-        //show the tooltip
-        oldtooltipContainer.style.opacity = 1;
-      }, 350);
+			  //show the tooltip
+			  oldtooltipContainer.style.opacity = 1;
+		  }, 350);
+		  return {skipTooltipButton: skipTooltipButton, prevTooltipButton: prevTooltipButton, nextTooltipButton: nextTooltipButton};
+	  }
 
-    } else {
+	  if (oldHelperLayer != null) {
+		  var __ret = showTooltipUsingExistingHelperLayer();
+		  var skipTooltipButton = __ret.skipTooltipButton;
+		  var prevTooltipButton = __ret.prevTooltipButton;
+		  var nextTooltipButton = __ret.nextTooltipButton;
+	  } else {
       var helperLayer       = document.createElement('div'),
           arrowLayer        = document.createElement('div'),
           tooltipLayer      = document.createElement('div'),
