@@ -441,52 +441,12 @@
 	  else showTooltipUsingExistingHelperLayer();
 
 	  setButtonClassesAndSkipButtonLabel();
-	  //Set focus on "next" button, so that hitting Enter always moves you onto the next step
-    nextTooltipButton.focus();
+	  setFocusToNextButton();
+	  positionTargetElementAboveTooltip();
+	  scrollToTargetElement();
 
-    //add target element position style
-    targetElement.element.className += ' introjs-showElement';
-
-    var currentElementPosition = _getPropValue(targetElement.element, 'position');
-    if (currentElementPosition !== 'absolute' &&
-        currentElementPosition !== 'relative') {
-      //change to new intro item
-      targetElement.element.className += ' introjs-relativePosition';
-    }
-
-    var parentElm = targetElement.element.parentNode;
-    while (parentElm != null) {
-      if (parentElm.tagName.toLowerCase() === 'body') break;
-
-      //fix The Stacking Contenxt problem. 
-      //More detail: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Understanding_z_index/The_stacking_context
-      var zIndex = _getPropValue(parentElm, 'z-index');
-      var opacity = parseFloat(_getPropValue(parentElm, 'opacity'));
-      if (/[0-9]+/.test(zIndex) || opacity < 1) {
-        parentElm.className += ' introjs-fixParent';
-      }
-	  
-      parentElm = parentElm.parentNode;
-    }
-
-    if (!_elementInViewport(targetElement.element) && this._options.scrollToElement === true) {
-      var rect = targetElement.element.getBoundingClientRect(),
-        winHeight=_getWinSize().height,
-        top = rect.bottom - (rect.bottom - rect.top),
-        bottom = rect.bottom - winHeight;
-
-      //Scroll up
-      if (top < 0 || targetElement.element.clientHeight > winHeight) {
-        window.scrollBy(0, top - 30); // 30px padding from edge to look nice
-
-      //Scroll down
-      } else {
-        window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
-      }
-    }
-    
-    if (typeof (this._introAfterChangeCallback) !== 'undefined') {
-        this._introAfterChangeCallback.call(this, targetElement.element);
+	  if (typeof (self._introAfterChangeCallback) !== 'undefined') {
+        self._introAfterChangeCallback.call(self, targetElement.element);
     }
 
 
@@ -683,6 +643,51 @@
         skipTooltipButton.innerHTML = self._options.skipLabel;
       }
     }
+
+	  function setFocusToNextButton() {
+			//Set focus on "next" button, so that hitting Enter always moves you onto the next step
+		  nextTooltipButton.focus();
+	  }
+
+	  function positionTargetElementAboveTooltip() {
+		  //add target element position style
+      targetElement.element.className += ' introjs-showElement';
+      var currentElementPosition = _getPropValue(targetElement.element, 'position');
+      if (currentElementPosition !== 'absolute' &&
+        currentElementPosition !== 'relative') {
+        //change to new intro item
+        targetElement.element.className += ' introjs-relativePosition';
+      }
+      var parentElm = targetElement.element.parentNode;
+      while (parentElm != null) {
+        if (parentElm.tagName.toLowerCase() === 'body') break;
+        //fix The Stacking Contenxt problem.
+        //More detail: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Understanding_z_index/The_stacking_context
+        var zIndex = _getPropValue(parentElm, 'z-index');
+        var opacity = parseFloat(_getPropValue(parentElm, 'opacity'));
+        if (/[0-9]+/.test(zIndex) || opacity < 1) {
+          parentElm.className += ' introjs-fixParent';
+        }
+        parentElm = parentElm.parentNode;
+      }
+    }
+	  
+	  function scrollToTargetElement() {
+		  if (!_elementInViewport(targetElement.element) && self._options.scrollToElement === true) {
+			  var rect = targetElement.element.getBoundingClientRect(),
+				  winHeight = _getWinSize().height,
+				  top = rect.bottom - (rect.bottom - rect.top),
+				  bottom = rect.bottom - winHeight;
+			  //Scroll up
+			  if (top < 0 || targetElement.element.clientHeight > winHeight) {
+				  window.scrollBy(0, top - 30); // 30px padding from edge to look nice
+				  //Scroll down
+			  }
+			  else {
+				  window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
+			  }
+		  }
+	  }
   }
 
 
