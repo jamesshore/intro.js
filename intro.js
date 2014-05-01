@@ -440,22 +440,8 @@
 	  if (oldHelperLayer === null) createHelperLayerAndShowTooltip();
 	  else showTooltipUsingExistingHelperLayer();
 
-
-    if (this._currentStep == 0 && this._introItems.length > 1) {
-      prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled';
-      nextTooltipButton.className = 'introjs-button introjs-nextbutton';
-      skipTooltipButton.innerHTML = this._options.skipLabel;
-    } else if (this._introItems.length - 1 == this._currentStep || this._introItems.length == 1) {
-      skipTooltipButton.innerHTML = this._options.doneLabel;
-      prevTooltipButton.className = 'introjs-button introjs-prevbutton';
-      nextTooltipButton.className = 'introjs-button introjs-nextbutton introjs-disabled';
-    } else {
-      prevTooltipButton.className = 'introjs-button introjs-prevbutton';
-      nextTooltipButton.className = 'introjs-button introjs-nextbutton';
-      skipTooltipButton.innerHTML = this._options.skipLabel;
-    }
-
-    //Set focus on "next" button, so that hitting Enter always moves you onto the next step
+	  setButtonClassesAndSkipButtonLabel();
+	  //Set focus on "next" button, so that hitting Enter always moves you onto the next step
     nextTooltipButton.focus();
 
     //add target element position style
@@ -679,6 +665,24 @@
 		  //set proper position
 		  _placeTooltip.call(self, targetElement.element, tooltipLayer, arrowLayer);
 	  }
+
+	  function setButtonClassesAndSkipButtonLabel() {
+      if (self._currentStep == 0 && self._introItems.length > 1) {
+        prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled';
+        nextTooltipButton.className = 'introjs-button introjs-nextbutton';
+        skipTooltipButton.innerHTML = self._options.skipLabel;
+      }
+      else if (self._introItems.length - 1 == self._currentStep || self._introItems.length == 1) {
+        skipTooltipButton.innerHTML = self._options.doneLabel;
+        prevTooltipButton.className = 'introjs-button introjs-prevbutton';
+        nextTooltipButton.className = 'introjs-button introjs-nextbutton introjs-disabled';
+      }
+      else {
+        prevTooltipButton.className = 'introjs-button introjs-prevbutton';
+        nextTooltipButton.className = 'introjs-button introjs-nextbutton';
+        skipTooltipButton.innerHTML = self._options.skipLabel;
+      }
+    }
   }
 
 
