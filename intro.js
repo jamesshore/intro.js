@@ -428,15 +428,11 @@
    */
   function _showElement(targetElement) {
 	  var nextTooltipButton, prevTooltipButton, skipTooltipButton;
+    var self = this;
 
+	  fireChangeEvent();
 
-    if (typeof (this._introChangeCallback) !== 'undefined') {
-        this._introChangeCallback.call(this, targetElement.element);
-    }
-
-    var self = this,
-        oldHelperLayer = document.querySelector('.introjs-helperLayer');
-
+	  var oldHelperLayer = document.querySelector('.introjs-helperLayer');
 	  if (oldHelperLayer === null) createHelperLayerAndShowTooltip();
 	  else showTooltipUsingExistingHelperLayer();
 
@@ -445,10 +441,8 @@
 	  positionTargetElementAboveTooltip();
 	  scrollToTargetElement();
 
-	  if (typeof (self._introAfterChangeCallback) !== 'undefined') {
-        self._introAfterChangeCallback.call(self, targetElement.element);
-    }
-
+	  fireAfterChangeEvent();
+		return;
 
 
 	  function showTooltipUsingExistingHelperLayer() {
@@ -671,7 +665,7 @@
         parentElm = parentElm.parentNode;
       }
     }
-	  
+
 	  function scrollToTargetElement() {
 		  if (!_elementInViewport(targetElement.element) && self._options.scrollToElement === true) {
 			  var rect = targetElement.element.getBoundingClientRect(),
@@ -688,6 +682,19 @@
 			  }
 		  }
 	  }
+
+	  function fireChangeEvent() {
+		  if (typeof (self._introChangeCallback) !== 'undefined') {
+			  self._introChangeCallback.call(self, targetElement.element);
+		  }
+	  }
+
+	  function fireAfterChangeEvent() {
+		  if (typeof (self._introAfterChangeCallback) !== 'undefined') {
+			  self._introAfterChangeCallback.call(self, targetElement.element);
+		  }
+	  }
+
   }
 
 
