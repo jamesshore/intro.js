@@ -76,7 +76,7 @@
 			"-W086": true,        // Expected a 'break' statement before 'default'.
 
 			// JSHint settings we really want
-			globalstrict: true    // Allow "use strict" at top level (because we're using CommonJS modules)
+			globalstrict: true,   // Allow "use strict" at top level (because we're using CommonJS modules)
 		};
 	}
 
@@ -93,7 +93,12 @@
 			expect: false,
 			dump: false,
 			beforeEach: false,
-			afterEach: false
+			afterEach: false,
+
+			// Browser
+			window: false,
+			document: false,
+			setTimeout: false
 		};
 	}
 

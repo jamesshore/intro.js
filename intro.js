@@ -911,12 +911,13 @@ exports.toTargetElement = function(self, targetElement) {
 		  winHeight = _getWinSize().height,
 		  top = rect.bottom - (rect.bottom - rect.top),
 		  bottom = rect.bottom - winHeight;
-	  //Scroll up
+
 	  if (top < 0 || targetElement.element.clientHeight > winHeight) {
+	    //Scroll up
 		  window.scrollBy(0, top - 30); // 30px padding from edge to look nice
-		  //Scroll down
 	  }
 	  else {
+		  //Scroll down
 		  window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
 	  }
   }
