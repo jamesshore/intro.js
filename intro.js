@@ -439,7 +439,7 @@
 	  setButtonClassesAndSkipButtonLabel();
 	  setFocusToNextButton();
 	  positionTargetElementAboveTooltip();
-	  scrollToTargetElement();
+	  scrollToTargetElement(self, targetElement);
 
 	  fireAfterChangeEvent();
 		return;
@@ -666,23 +666,6 @@
       }
     }
 
-	  function scrollToTargetElement() {
-		  if (!_elementInViewport(targetElement.element) && self._options.scrollToElement === true) {
-			  var rect = targetElement.element.getBoundingClientRect(),
-				  winHeight = _getWinSize().height,
-				  top = rect.bottom - (rect.bottom - rect.top),
-				  bottom = rect.bottom - winHeight;
-			  //Scroll up
-			  if (top < 0 || targetElement.element.clientHeight > winHeight) {
-				  window.scrollBy(0, top - 30); // 30px padding from edge to look nice
-				  //Scroll down
-			  }
-			  else {
-				  window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
-			  }
-		  }
-	  }
-
 	  function fireChangeEvent() {
 		  if (typeof (self._introChangeCallback) !== 'undefined') {
 			  self._introChangeCallback.call(self, targetElement.element);
@@ -696,6 +679,26 @@
 	  }
 
   }
+
+
+	function scrollToTargetElement(self, targetElement) {
+	  if (!_elementInViewport(targetElement.element) && self._options.scrollToElement === true) {
+		  var rect = targetElement.element.getBoundingClientRect(),
+			  winHeight = _getWinSize().height,
+			  top = rect.bottom - (rect.bottom - rect.top),
+			  bottom = rect.bottom - winHeight;
+		  //Scroll up
+		  if (top < 0 || targetElement.element.clientHeight > winHeight) {
+			  window.scrollBy(0, top - 30); // 30px padding from edge to look nice
+			  //Scroll down
+		  }
+		  else {
+			  window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
+		  }
+	  }
+	}
+
+
 
 
   /**
