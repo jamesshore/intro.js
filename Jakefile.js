@@ -7,7 +7,13 @@
 	var browserify = require("browserify");
 	var fs = require("fs");
 
+	desc("Lint and unit test the code");
 	task("default", [ "lint", "test" ]);
+
+	desc("Start Karma server for testing");
+	task("karma", function() {
+		karma.serve("build/karma.conf.js", complete, fail);
+	}, {async: true});
 
 	desc("Lint the code");
 	task("lint", function() {
@@ -19,8 +25,13 @@
 		}, complete, fail);
 	}, { async: true });
 
+	desc("Run unit tests");
+	task("test", function() {
+		karma.runTests([], complete, fail);
+	}, { async: true });
+
 	desc("Run pinning tests");
-	task("test", ["fixPhantomJsPermissions", "bundle"], function() {
+	task("pinningTest", ["fixPhantomJsPermissions", "bundle"], function() {
 		console.log("Testing:");
 		casperjs.runPinningTests(complete, fail);
 	}, { async: true });
