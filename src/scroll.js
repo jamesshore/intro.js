@@ -1,13 +1,13 @@
 // Copyright (c) 2014 Titanium I.T. LLC. All rights reserved. For license, see "README" or "LICENSE" file.
 
-exports.toTargetElement = function(self, targetElement) {
-  if (!_elementInViewport(targetElement.element)) {
-	  var rect = targetElement.element.getBoundingClientRect(),
+exports.toDomElement = function(self, domElement) {
+  if (!_elementInViewport(domElement)) {
+	  var rect = domElement.getBoundingClientRect(),
 		  winHeight = _getWinSize().height,
 		  top = rect.bottom - (rect.bottom - rect.top),
 		  bottom = rect.bottom - winHeight;
 
-	  if (top < 0 || targetElement.element.clientHeight > winHeight) {
+	  if (top < 0 || domElement.clientHeight > winHeight) {
 	    //Scroll up
 		  window.scrollBy(0, top - 30); // 30px padding from edge to look nice
 	  }

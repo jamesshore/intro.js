@@ -429,7 +429,7 @@ function _showElement(targetElement) {
   setButtonClassesAndSkipButtonLabel();
   setFocusToNextButton();
   positionTargetElementAboveTooltip();
-  if (self._options.scrollToElement === true) scroll.toTargetElement(self, targetElement);
+  if (self._options.scrollToElement === true) scroll.toDomElement(self, targetElement.element);
 
   fireAfterChangeEvent();
 	return;

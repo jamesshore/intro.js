@@ -18,13 +18,12 @@ describe("scrollToTargetElement", function() {
 		document.body.removeChild(div);
 	});
 
-	it("scrolls down to put element in viewport", function(done) {
+	it("scrolls down to put element in viewport", function() {
 		div.style.top = "10000px";
 		div.style.paddingBottom = "200px";
 
-		scroll.toTargetElement(null, { element: div });
+		scroll.toDomElement(null, div);
 
-		setTimeout(done, 1000);
 		expect(window.pageYOffset).to.equal(10000 - 30);    // 30 pixels of padding
 	});
 
