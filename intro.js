@@ -439,7 +439,7 @@
 	  setButtonClassesAndSkipButtonLabel();
 	  setFocusToNextButton();
 	  positionTargetElementAboveTooltip();
-	  scrollToTargetElement(self, targetElement);
+    if (self._options.scrollToElement === true) scrollToTargetElement(self, targetElement);
 
 	  fireAfterChangeEvent();
 		return;
@@ -682,7 +682,7 @@
 
 
 	function scrollToTargetElement(self, targetElement) {
-	  if (!_elementInViewport(targetElement.element) && self._options.scrollToElement === true) {
+	  if (!_elementInViewport(targetElement.element)) {
 		  var rect = targetElement.element.getBoundingClientRect(),
 			  winHeight = _getWinSize().height,
 			  top = rect.bottom - (rect.bottom - rect.top),
