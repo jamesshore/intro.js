@@ -22,7 +22,7 @@
 		jshint.checkFiles({
 			files: [ "Jakefile.js", "src/**/*.js", "tests/**/*.js" ],
 			options: jshintOptions(),
-			globals: {}
+			globals: jshintGlobals()
 		}, complete, fail);
 	}, { async: true });
 
@@ -70,9 +70,31 @@
 			scripturl: true,
 			loopfunc: true,
 			expr: true,
+			strict: false,
 			"-W032": true,        // Unnecessary semicolon
 			"-W041": true,        // Use '===' to compare with 'true'
-			"-W086": true         // Expected a 'break' statement before 'default'.
+			"-W086": true,        // Expected a 'break' statement before 'default'.
+
+			// JSHint settings we really want
+			globalstrict: true    // Allow "use strict" at top level (because we're using CommonJS modules)
 		};
 	}
+
+	function jshintGlobals() {
+		return {
+			// Browserify
+			require: false,
+			module: false,
+			exports: false,
+
+			// Mocha / expect.js
+			describe: false,
+			it: false,
+			expect: false,
+			dump: false,
+			beforeEach: false,
+			afterEach: false
+		};
+	}
+
 }());
