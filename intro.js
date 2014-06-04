@@ -698,6 +698,41 @@
 	  }
 	}
 
+	/**
+  * Check if element is visible
+  * http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+  *
+  * @api private
+  * @method _elementInViewport
+  * @param {Object} el
+  */
+ function _elementInViewport(el) {
+   var rect = el.getBoundingClientRect();
+
+   return (
+     rect.top >= 0 &&
+     rect.left >= 0 &&
+     (rect.bottom+80) <= window.innerHeight && // add 80 to get the text right
+     rect.right <= window.innerWidth
+   );
+ }
+
+	/**
+  * Provides a cross-browser way to get the screen dimensions
+  * via: http://stackoverflow.com/questions/5864467/internet-explorer-innerheight
+  *
+  * @api private
+  * @method _getWinSize
+  * @returns {Object} width and height attributes
+  */
+ function _getWinSize() {
+   if (window.innerWidth != undefined) {
+     return { width: window.innerWidth, height: window.innerHeight };
+   } else {
+     var D = document.documentElement;
+     return { width: D.clientWidth, height: D.clientHeight };
+   }
+ }
 
 
 
@@ -727,41 +762,6 @@
     }
   }
 
-  /**
-   * Provides a cross-browser way to get the screen dimensions
-   * via: http://stackoverflow.com/questions/5864467/internet-explorer-innerheight
-   *
-   * @api private
-   * @method _getWinSize
-   * @returns {Object} width and height attributes
-   */
-  function _getWinSize() {
-    if (window.innerWidth != undefined) {
-      return { width: window.innerWidth, height: window.innerHeight };
-    } else {
-      var D = document.documentElement;
-      return { width: D.clientWidth, height: D.clientHeight };
-    }
-  }
-
-  /**
-   * Add overlay layer to the page
-   * http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
-   *
-   * @api private
-   * @method _elementInViewport
-   * @param {Object} el
-   */
-  function _elementInViewport(el) {
-    var rect = el.getBoundingClientRect();
-
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      (rect.bottom+80) <= window.innerHeight && // add 80 to get the text right
-      rect.right <= window.innerWidth
-    );
-  }
 
   /**
    * Add overlay layer to the page
