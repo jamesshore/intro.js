@@ -63,7 +63,6 @@
     </div>
     <script type="text/javascript" src="../../intro.js"></script>
     <script type="text/javascript">
-      var introJs = require("introJs").introJs;
       document.getElementById('startButton').onclick = function() {
         introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
           window.location.href = 'second.html?multipage=true';

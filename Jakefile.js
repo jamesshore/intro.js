@@ -34,9 +34,8 @@
 	desc("Bundle CommonJS modules into a single file");
 	task("bundle", function() {
 		console.log("Bundling intro.js with Browserify...");
-		var b = browserify();
-		b.require("./src/intro.js", { expose: "introJs" } );
-		b.bundle({ }, function(err, bundle) {
+		var b = browserify("./src/intro.js");
+		b.bundle({ standalone: "introJs" }, function(err, bundle) {
 			if (err) fail(err);
 			fs.writeFileSync("./intro.js", bundle);
 			complete();

@@ -953,4 +953,4 @@ introJs.fn = IntroJs.prototype = {
   }
 };
 
-exports.introJs = introJs;
+module.exports = introJs;
