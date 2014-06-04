@@ -15,7 +15,8 @@
     "http-server": "^0.6.1",
     "casperjs": "^1.1.0-beta3",
     "phantomjs": "^1.9.7-1",
-    "big-object-diff": "^0.7.0"
+    "big-object-diff": "^0.7.0",
+    "browserify": "^4.1.8"
   },
   "engine": [
     "node >=0.1.90"

@@ -4,6 +4,8 @@
 
 	var jshint = require("simplebuild-jshint");
 	var casperjs = require("./tests/casperjs_runner.js");
+	var browserify = require("browserify");
+	var fs = require("fs");
 
 	task("default", [ "lint", "test" ]);
 
@@ -11,22 +13,34 @@
 	task("lint", function() {
 		process.stdout.write("Linting: ");
 		jshint.checkFiles({
-			files: [ "*.js", "tests/**/*.js" ],
+			files: [ "Jakefile.js", "src/**/*.js", "tests/**/*.js" ],
 			options: jshintOptions(),
 			globals: {}
 		}, complete, fail);
 	}, { async: true });
 
-	desc("Run tests");
-	task("test", ["fixPhantomJsPermissions"], function() {
+	desc("Run pinning tests");
+	task("test", ["fixPhantomJsPermissions", "bundle"], function() {
 		console.log("Testing:");
 		casperjs.runPinningTests(complete, fail);
 	}, { async: true });
 
 	desc("Run a local server for manual testing");
-	task("run", function() {
+	task("run", ["bundle"], function() {
 		console.log("** Navigate to the 'example' directory **");
 		jake.exec("node node_modules/http-server/bin/http-server", { interactive: true }, complete);
+	}, { async: true });
+
+	desc("Bundle CommonJS modules into a single file");
+	task("bundle", function() {
+		console.log("Bundling client files with Browserify...");
+		var b = browserify();
+		b.require("./src/intro.js", { expose: "introJs" } );
+		b.bundle({ }, function(err, bundle) {
+			if (err) fail(err);
+			fs.writeFileSync("./intro.js", bundle);
+			complete();
+		});
 	}, { async: true });
 
 	// When PhantomJS is installed through npm, it's installed without execute permissions.
