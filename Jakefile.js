@@ -6,6 +6,7 @@
 	var casperjs = require("./tests/casperjs_runner.js");
 	var browserify = require("browserify");
 	var fs = require("fs");
+	var karma = require("./build/karma_runner.js");
 
 	desc("Lint and unit test the code");
 	task("default", [ "lint", "test" ]);
