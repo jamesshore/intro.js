@@ -33,7 +33,7 @@
 
 	desc("Bundle CommonJS modules into a single file");
 	task("bundle", function() {
-		console.log("Bundling client files with Browserify...");
+		console.log("Bundling intro.js with Browserify...");
 		var b = browserify();
 		b.require("./src/intro.js", { expose: "introJs" } );
 		b.bundle({ }, function(err, bundle) {
