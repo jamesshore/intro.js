@@ -11,7 +11,7 @@ The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) introd
 
 The [third episode](http://www.letscodejavascript.com/v3/episodes/lab/8) used the pinning tests to act as a safety net for refactoring `_showElement()`, one of Intro.js's key functions. Refactoring is a technique for changing the design of existing code without changing its behavior. The refactored code can be found in [Intro.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab8/intro.js) in lines 429-698.
 
-The [fourth episode](http://www.letscodejavascript.com/v3/episodes/lab/9) factored the `scrollToTargetElement()` function into a testable module, introduced Karma for cross-browser unit testing, and implemented a few demonstration unit tests. The example tests can be found in [_scroll_test.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab8/src/_scroll_test.js) and the extracted module can be found in [scroll.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab8/src/scroll.js)
+The [fourth episode](http://www.letscodejavascript.com/v3/episodes/lab/9) factored the `scrollToTargetElement()` function into a testable module, introduced Karma for cross-browser unit testing, and implemented a few demonstration unit tests. The example tests can be found in [_scroll_test.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab9/src/_scroll_test.js) and the extracted module can be found in [scroll.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab9/src/scroll.js).
 
 Further testing and refactoring is left as an exercise for the viewer.
 
