@@ -15,16 +15,31 @@ The [fourth episode](http://www.letscodejavascript.com/v3/episodes/lab/9) factor
 
 Further testing and refactoring is left as an exercise for the viewer.
 
-## To run the tests
+## To run the unit tests
 
-1. Clone the repository and check out the master branch.
-2. Run `npm install` to install dependencies.
-3. Run `./jake.sh karma` to start Karma server.
-4. Point a web browser at `http://localhost:9876`.
-5. Run `./jake.sh` to lint and run the unit tests.
-6. Run `./jake.sh pinningTest` to run the pinning tests.
+(Start by cloning the repository and checking out the master branch.)
+
+1. Run `./jake.sh karma` to start Karma server.
+2. Point a web browser at `http://localhost:9876`. Firefox 29 is known to work.
+3. Run `./jake.sh` to lint and run the unit tests.
 
 If you're using Windows, you can run `jake` instead of `./jake.sh`. However, the code has not been tested on Windows.
+
+## To run the pinning tests
+
+(Start by cloning the repository and checking out the master branch.)
+
+1. Run `./jake.sh pinningTest`.
+
+Note that the pinning tests are machine-specific. They'll probably fail when you run them. To make the pinning tests work on your machine, you need to rewrite the tests' approvals. This will cause the pinning tests to consider the current state of the code to be the "known good" reference.
+
+To rewrite the pinning tests’ approvals:
+
+1. Open [pinning_tests.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab9/tests/pinning_tests.js).
+2. Change the `RESET_APPROVALS` constant on line 11 to `true`.
+3. Run `./jake.sh pinningTest` to rewrite the approvals. The test will report the rewrites as failures.
+4. Change the `RESET_APPROVALS` constant back to `false`.
+5. Run `./jake.sh pinningTest` to run the pinning tests. They should pass.
 
 
 -----
