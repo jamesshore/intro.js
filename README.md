@@ -7,11 +7,40 @@ The Legacy Code Challenge episodes are about refactoring and adding tests to leg
 
 The [first episode](http://www.letscodejavascript.com/v3/episodes/lab/6) focused on reverse engineering the design of Intro.js and creating a test strategy. The source code for that episode is on the [lab6 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab6) and the notes from that work can be found in [todo.txt](https://github.com/jamesshore/lab6_legacy_code/blob/lab6/todo.txt).
 
-The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) introduced automating “pinning tests” to Intro.js. Pinning tests are rough tests designed to tell you when you’ve changed the behavior of your code in some way. They can be found in the [tests directory](https://github.com/jamesshore/lab6_legacy_code/tree/lab7/tests).
+The [second episode](http://www.letscodejavascript.com/v3/episodes/lab/7) introduced automating “pinning tests” to Intro.js. Pinning tests are rough tests designed to tell you when you’ve changed the behavior of your code in some way. The source code for that episode is on the [lab7 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab7). The pinning tests can be found in the [tests directory](https://github.com/jamesshore/lab6_legacy_code/tree/lab7/tests).
 
-The [third episode](http://www.letscodejavascript.com/v3/episodes/lab/8) used the pinning tests to act as a safety net for refactoring `_showElement()`, one of Intro.js's key functions. Refactoring is a technique for changing the design of existing code without changing its behavior. The refactored code can be found in [intro.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab8/intro.js) in lines 429-698.
+The [third episode](http://www.letscodejavascript.com/v3/episodes/lab/8) used the pinning tests to act as a safety net for refactoring `_showElement()`, one of Intro.js's key functions. Refactoring is a technique for changing the design of existing code without changing its behavior. The source code for that episode is on the [lab8 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab8). The refactored code can be found in [Intro.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab8/intro.js) in lines 429-698.
 
-The remaining episodes are still in progress.
+The [fourth episode](http://www.letscodejavascript.com/v3/episodes/lab/9) factored the `scrollToTargetElement()` function into a testable module, introduced Karma for cross-browser unit testing, and implemented a few demonstration unit tests. The source code for that episode is on the [lab9 branch](https://github.com/jamesshore/lab6_legacy_code/tree/lab9). The example tests can be found in [_scroll_test.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab9/src/_scroll_test.js) and the extracted module can be found in [scroll.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab9/src/scroll.js).
+
+Further testing and refactoring is left as an exercise for the viewer.
+
+## To run the unit tests
+
+(Start by cloning the repository and checking out the master branch.)
+
+1. Run `./jake.sh karma` to start Karma server.
+2. Point a web browser at `http://localhost:9876`. Firefox 29 is known to work.
+3. Run `./jake.sh` to lint and run the unit tests.
+
+If you're using Windows, you can run `jake` instead of `./jake.sh`. However, the code has not been tested on Windows.
+
+## To run the pinning tests
+
+(Start by cloning the repository and checking out the master branch.)
+
+1. Run `./jake.sh pinningTest`.
+
+Note that the pinning tests are machine-specific. They'll probably fail when you run them. To make the pinning tests work on your machine, you need to rewrite the tests' approvals. This will cause the pinning tests to consider the current state of the code to be the "known good" reference.
+
+To rewrite the pinning tests’ approvals:
+
+1. Open [pinning_tests.js](https://github.com/jamesshore/lab6_legacy_code/blob/lab9/tests/pinning_tests.js).
+2. Change the `RESET_APPROVALS` constant on line 11 to `true`.
+3. Run `./jake.sh pinningTest` to rewrite the approvals. The test will report the rewrites as failures.
+4. Change the `RESET_APPROVALS` constant back to `false`.
+5. Run `./jake.sh pinningTest` to run the pinning tests. They should pass.
+
 
 -----
 
